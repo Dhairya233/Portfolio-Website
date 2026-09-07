@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Dhairya's portfolio. A creative developer building thoughtful digital experiences."
+  />
+  <title>Dhairya | Creative Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --ink: #151515;
+      --paper: #f4f0e8;
+      --paper-dark: #e7e0d4;
+      --lime: #d8ff3e;
+      --coral: #ff6848;
+      --blue: #8bc6ff;
+      --muted: #69665f;
+      --line: rgba(21, 21, 21, 0.18);
+      --display: "Space Grotesk", sans-serif;
+      --mono: "DM Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--display);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      color: inherit;
+      font: inherit;
+    }
+
+    .site-shell {
+      margin: 0 auto;
+      max-width: 1540px;
+      padding: 0 34px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding: 28px 0;
+    }
+
+    .logo {
+      align-items: center;
+      display: inline-flex;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      gap: 10px;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .logo-mark {
+      background: var(--coral);
+      border-radius: 50%;
+      display: inline-block;
+      height: 13px;
+      width: 13px;
+    }
+
+    .desktop-nav {
+      align-items: center;
+      display: flex;
+      gap: 34px;
+    }
+
+    .desktop-nav a,
+    .menu-toggle {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .desktop-nav a {
+      position: relative;
+    }
+
+    .desktop-nav a::after {
+      background: var(--ink);
+      bottom: -7px;
+      content: "";
+      height: 1px;
+      left: 0;
+      position: absolute;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 220ms ease;
+      width: 100%;
+    }
+
+    .desktop-nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .menu-toggle {
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      display: none;
+    }
+
+    .hero {
+      min-height: calc(100vh - 85px);
+      padding: 12vh 0 100px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 50px;
+      grid-template-columns: minmax(0, 1.4fr) minmax(270px, 0.6fr);
+    }
+
+    .eyebrow {
+      align-items: center;
+      color: var(--muted);
+      display: flex;
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      gap: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      background: var(--coral);
+      content: "";
+      height: 8px;
+      width: 8px;
+    }
+
+    .hero-title {
+      font-size: clamp(4rem, 10.3vw, 10.5rem);
+      font-weight: 600;
+      letter-spacing: -0.1em;
+      line-height: 0.84;
+      margin: 48px 0;
+      max-width: 1080px;
+    }
+
+    .hero-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--ink);
+    }
+
+    .hero-title .accent {
+      color: var(--coral);
+    }
+
+    .hero-copy {
+      align-self: end;
+      max-width: 350px;
+      padding-bottom: 10px;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.5;
+      margin-bottom: 26px;
+    }
+
+    .button {
+      align-items: center;
+      background: var(--ink);
+      border: 1px solid var(--ink);
+      color: var(--paper);
+      display: inline-flex;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      gap: 18px;
+      letter-spacing: 0.05em;
+      padding: 16px 19px;
+      text-transform: uppercase;
+      transition:
+        background 200ms ease,
+        color 200ms ease,
+        transform 200ms ease;
+    }
+
+    .button:hover {
+      background: var(--lime);
+      color: var(--ink);
+      transform: translateY(-4px);
+    }
+
+    .button span {
+      font-size: 1rem;
+    }
+
+    .hero-orbit {
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      height: 240px;
+      position: absolute;
+      right: 5%;
+      top: 12%;
+      width: 240px;
+      z-index: -1;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      content: "";
+      inset: 30px;
+      position: absolute;
+    }
+
+    .hero-orbit::after {
+      background: var(--lime);
+      border: 0;
+      height: 22px;
+      inset: auto 12px 22px auto;
+      width: 22px;
+    }
+
+    .scroll-note {
+      align-items: center;
+      bottom: 55px;
+      display: flex;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      gap: 12px;
+      letter-spacing: 0.04em;
+      position: absolute;
+      right: 0;
+      text-transform: uppercase;
+      transform: rotate(90deg);
+      transform-origin: right center;
+    }
+
+    .scroll-note::before {
+      background: var(--ink);
+      content: "";
+      height: 1px;
+      width: 70px;
+    }
+
+    .section {
+      border-top: 1px solid var(--line);
+      padding: 120px 0;
+    }
+
+    .section-heading {
+      align-items: start;
+      display: grid;
+      gap: 40px;
+      grid-template-columns: 0.6fr 1.4fr;
+      margin-bottom: 70px;
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+
+    .section-title {
+      font-size: clamp(2.8rem, 6vw, 6.5rem);
+      font-weight: 500;
+      letter-spacing: -0.08em;
+      line-height: 0.9;
+      max-width: 850px;
+    }
+
+    .section-title em {
+      color: var(--coral);
+      font-style: normal;
+    }
+
+    .projects {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .project {
+      min-height: 500px;
+      overflow: hidden;
+      padding: 26px;
+      position: relative;
+    }
+
+    .project:nth-child(1) {
+      background: var(--ink);
+      color: var(--paper);
+      grid-column: span 7;
+    }
+
+    .project:nth-child(2) {
+      background: var(--blue);
+      grid-column: span 5;
+    }
+
+    .project:nth-child(3) {
+      background: var(--coral);
+      grid-column: span 5;
+    }
+
+    .project:nth-child(4) {
+      background: var(--lime);
+      grid-column: span 7;
+    }
+
+    .project::after {
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      content: "";
+      height: 260px;
+      opacity: 0.2;
+      position: absolute;
+      right: -55px;
+      top: 80px;
+      transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+      width: 260px;
+    }
+
+    .project:hover::after {
+      transform: scale(1.6) rotate(25deg);
+    }
+
+    .project-top,
+    .project-bottom {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-top {
+      font-family: var(--mono);
+      font-size: 0.67rem;
+      text-transform: uppercase;
+    }
+
+    .project-number {
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      display: grid;
+      height: 32px;
+      place-items: center;
+      width: 32px;
+    }
+
+    .project-bottom {
+      bottom: 26px;
+      left: 26px;
+      right: 26px;
+    }
+
+    .project h3 {
+      font-size: clamp(2.5rem, 5vw, 5.8rem);
+      font-weight: 500;
+      letter-spacing: -0.09em;
+      line-height: 0.85;
+      max-width: 500px;
+    }
+
+    .project-link {
+      align-items: center;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      display: grid;
+      height: 52px;
+      place-items: center;
+      transition:
+        background 200ms ease,
+        color 200ms ease,
+        transform 200ms ease;
+      width: 52px;
+    }
+
+    .project:hover .project-link {
+      background: currentColor;
+      color: var(--paper);
+      transform: rotate(45deg);
+    }
+
+    .project:nth-child(2):hover .project-link,
+    .project:nth-child(3):hover .project-link,
+    .project:nth-child(4):hover .project-link {
+      color: var(--ink);
+    }
+
+    .about-layout {
+      display: grid;
+      gap: 80px;
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+
+    .about-intro {
+      font-size: clamp(2rem, 4vw, 4.3rem);
+      letter-spacing: -0.07em;
+      line-height: 0.97;
+    }
+
+    .about-intro strong {
+      color: var(--coral);
+      font-weight: 500;
+    }
+
+    .about-details {
+      border-top: 1px solid var(--line);
+    }
+
+    .about-row {
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 25px;
+      grid-template-columns: 0.6fr 1.4fr;
+      padding: 22px 0;
+    }
+
+    .about-row h3 {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .about-row p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.55;
+      max-width: 600px;
+    }
+
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      border: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 10px 13px;
+      text-transform: uppercase;
+    }
+
+    .contact {
+      background: var(--ink);
+      color: var(--paper);
+      margin: 0 -34px;
+      padding: 120px 34px 40px;
+    }
+
+    .contact-inner {
+      margin: 0 auto;
+      max-width: 1472px;
+    }
+
+    .contact .section-number {
+      color: rgba(244, 240, 232, 0.55);
+    }
+
+    .contact-title {
+      font-size: clamp(4rem, 12vw, 13rem);
+      font-weight: 500;
+      letter-spacing: -0.1em;
+      line-height: 0.78;
+      margin: 80px 0 100px;
+      max-width: 1200px;
+    }
+
+    .contact-title span {
+      color: var(--lime);
+    }
+
+    .contact-bottom {
+      align-items: end;
+      border-top: 1px solid rgba(244, 240, 232, 0.25);
+      display: flex;
+      justify-content: space-between;
+      padding-top: 25px;
+    }
+
+    .contact-email {
+      font-size: clamp(1.4rem, 3vw, 3rem);
+      letter-spacing: -0.06em;
+      transition: color 200ms ease;
+    }
+
+    .contact-email:hover {
+      color: var(--lime);
+    }
+
+    .socials {
+      display: flex;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      gap: 22px;
+      text-transform: uppercase;
+    }
+
+    footer {
+      background: var(--ink);
+      color: rgba(244, 240, 232, 0.5);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      padding: 0 34px 30px;
+      text-transform: uppercase;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 1472px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity 700ms ease,
+        transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 800px) {
+      .site-shell {
+        padding: 0 20px;
+      }
+
+      .desktop-nav {
+        background: var(--ink);
+        color: var(--paper);
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        left: 20px;
+        opacity: 0;
+        padding: 28px;
+        pointer-events: none;
+        position: absolute;
+        right: 20px;
+        top: 72px;
+        transform: translateY(-12px);
+        transition:
+          opacity 200ms ease,
+          transform 200ms ease;
+        z-index: 10;
+      }
+
+      .desktop-nav.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .desktop-nav a::after {
+        background: var(--paper);
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 90px 0 120px;
+      }
+
+      .hero-grid,
+      .section-heading,
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: clamp(4.2rem, 18vw, 8rem);
+        margin: 40px 0;
+      }
+
+      .hero-copy {
+        max-width: 500px;
+      }
+
+      .hero-orbit {
+        height: 140px;
+        right: -40px;
+        top: 26%;
+        width: 140px;
+      }
+
+      .hero-orbit::before {
+        inset: 18px;
+      }
+
+      .scroll-note {
+        display: none;
+      }
+
+      .section {
+        padding: 90px 0;
+      }
+
+      .section-heading {
+        gap: 22px;
+        margin-bottom: 48px;
+      }
+
+      .projects {
+        display: block;
+      }
+
+      .project {
+        min-height: 420px;
+        margin-bottom: 18px;
+      }
+
+      .about-layout {
+        gap: 50px;
+      }
+
+      .about-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .contact {
+        margin: 0 -20px;
+        padding: 90px 20px 34px;
+      }
+
+      .contact-title {
+        margin: 65px 0 80px;
+      }
+
+      .contact-bottom,
+      .footer-inner {
+        align-items: start;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      footer {
+        padding: 0 20px 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-shell">
+    <div class="topbar">
+      <a class="logo" href="#top" aria-label="Dhairya home">
+        <span class="logo-mark"></span>
+        Dhairya / Portfolio
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false">
+        Menu +
+      </button>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero site-shell">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow reveal">Available for selected projects</div>
+
+          <h1 class="hero-title reveal">
+            Digital<br />
+            <span class="outline">ideas</span><br />
+            <span class="accent">with intent.</span>
+          </h1>
+        </div>
+
+        <div class="hero-copy reveal">
+          <p>
+            I am Dhairya, a developer focused on building sharp, useful, and
+            memorable digital experiences.
+          </p>
+
+          <a class="button" href="#work">
+            Explore selected work
+            <span>↘</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-orbit" aria-hidden="true"></div>
+      <div class="scroll-note">Scroll to explore</div>
+    </section>
+
+    <section class="section site-shell" id="work">
+      <div class="section-heading reveal">
+        <span class="section-number">01 / Selected work</span>
+        <h2 class="section-title">
+          A few things I have helped bring <em>to life.</em>
+        </h2>
+      </div>
+
+      <div class="projects">
+        <article class="project reveal">
+          <div class="project-top">
+            <span>Brand platform / 2025</span>
+            <span class="project-number">01</span>
+          </div>
+
+          <div class="project-bottom">
+            <h3>Northstar</h3>
+            <a class="project-link" href="#" aria-label="View Northstar project">↗</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span>Web application / 2025</span>
+            <span class="project-number">02</span>
+          </div>
+
+          <div class="project-bottom">
+            <h3>Orbit</h3>
+            <a class="project-link" href="#" aria-label="View Orbit project">↗</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span>Commerce / 2024</span>
+            <span class="project-number">03</span>
+          </div>
+
+          <div class="project-bottom">
+            <h3>Common<br />Ground</h3>
+            <a class="project-link" href="#" aria-label="View Common Ground project">↗</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span>Interaction design / 2024</span>
+            <span class="project-number">04</span>
+          </div>
+
+          <div class="project-bottom">
+            <h3>After<br />Hours</h3>
+            <a class="project-link" href="#" aria-label="View After Hours project">↗</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section site-shell" id="about">
+      <div class="section-heading reveal">
+        <span class="section-number">02 / About</span>
+        <h2 class="section-title">
+          Less noise.<br />
+          More <em>signal.</em>
+        </h2>
+      </div>
+
+      <div class="about-layout">
+        <p class="about-intro reveal">
+          I care about the space where <strong>design, technology,</strong>
+          and people meet.
+        </p>
+
+        <div class="about-details reveal">
+          <div class="about-row">
+            <h3>Approach</h3>
+            <p>
+              I turn complex ideas into clear, accessible interfaces that are
+              enjoyable to use and easy to understand.
+            </p>
+          </div>
+
+          <div class="about-row">
+            <h3>Currently</h3>
+            <p>
+              Exploring the web platform, creative development, motion, and
+              practical ways to make digital products feel more human.
+            </p>
+          </div>
+
+          <div class="about-row">
+            <h3>Toolkit</h3>
+            <div class="skills-wrap">
+              <span class="skill">HTML</span>
+              <span class="skill">CSS</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">React</span>
+              <span class="skill">Node.js</span>
+              <span class="skill">Figma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-inner">
+        <span class="section-number">03 / Contact</span>
+
+        <h2 class="contact-title reveal">
+          Have an idea?<br />
+          <span>Let us make it real.</span>
+        </h2>
+
+        <div class="contact-bottom">
+          <a class="contact-email" href="mailto:hello@dhairya.dev">
+            hello@dhairya.dev
+          </a>
+
+          <div class="socials">
+            <a href="#" aria-label="GitHub profile">GitHub</a>
+            <a href="#" aria-label="LinkedIn profile">LinkedIn</a>
+            <a href="#" aria-label="Instagram profile">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> Dhairya</span>
+      <span>Built with curiosity</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector(".desktop-nav");
+    const navigationLinks = document.querySelectorAll(".desktop-nav a");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.textContent = isOpen ? "Close -" : "Menu +";
+    });
+
+    navigationLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navigation.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "Menu +";
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element, index) => {
+      element.style.transitionDelay = `${Math.min(index * 60, 300)}ms`;
+      observer.observe(element);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
